@@ -1,12 +1,11 @@
-// middleware/auth.js
 module.exports = (req, res, next) => {
-    if (req.session.loggedIn) {
-      next();
+    if (req.session && req.session.userId) {
+      return next();
     } else {
-      res.redirect('/signin');
+      return res.redirect('/signin');
     }
   };
-
+  
   // routes/auth.js
 const express = require('express');
 const router = express.Router();

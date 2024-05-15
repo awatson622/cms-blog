@@ -1,41 +1,41 @@
 const express = require('express');
-const exphbs  = require('express-handlebars');
-// server.js
-const app = require('./app');
-const db = require('./models');
-
-const PORT = process.env.PORT || 3000;
-
-db.sequelize.sync().then(() => {
-  app.listen(PORT);
-}
+const path = require('path');
+const session = require('express-session');
+const exphbs = require('express-handlebars');
+const { sequelize } = require('./models');
+const routes = require('./routes');
+require('dotenv').config({ path: './config/db.env' });
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-// Set up handlebars as the view engine
-app.engine('handlebars', exphbs());
+// Set up session with connect-session-sequelize
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+const sess = {
+  secret: process.env.SESSION_SECRET,
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
+};
+
+app.use(session(sess));
+
+// Set up Handlebars.js as the template engine
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-require('dotenv').config();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-const app = require('./app');
-const sequelize = require('./models');
+app.use(routes);
 
-const port = process.env.PORT || 3000;
-
-sequelize.sync().then(() => {
-  app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-  });
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
 });
 
-const { Sequelize } = require('sequelize');
-require('dotenv').config();
-
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-  host: process.env.DB_HOST,
-  dialect: process.env.DB_DIALECT,
-});
-
-module.exports = sequelize;
 
