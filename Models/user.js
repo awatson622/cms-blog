@@ -1,6 +1,7 @@
 // models/User.js
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('./index');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
+const bcrypt = require('bcrypt');
 
 const User = sequelize.define('User', {
   username: {
@@ -14,4 +15,9 @@ const User = sequelize.define('User', {
   },
 });
 
+User.beforeCreate(async (user) => {
+  user.password = await bcrypt.hash(user.password, 10);
+});
+
 module.exports = User;
+

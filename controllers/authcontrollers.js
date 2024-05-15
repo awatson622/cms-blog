@@ -1,5 +1,6 @@
 // controllers/authController.js
-const User = require('../models/User');
+const { User } = require('../models');
+const bcrypt = require('bcrypt');
 
 exports.signup = async (req, res) => {
   try {
@@ -14,5 +15,23 @@ exports.signup = async (req, res) => {
 };
 
 exports.signin = async (req, res) => {
-  // Implement signin logic
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ where: { username } });
+    if (user && await bcrypt.compare(password, user.password)) {
+      req.session.loggedIn = true;
+      req.session.username = user.username;
+      res.redirect('/dashboard');
+    } else {
+      res.status(401).send('Invalid credentials');
+    }
+  } catch (error) {
+    res.status(500).send('Error signing in');
+  }
+};
+
+exports.logout = (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/');
+  });
 };

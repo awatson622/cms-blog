@@ -29,6 +29,16 @@ router.get('/dashboard', auth, (req, res) => {
   res.render('dashboard', { posts: [/* array of user posts */] });
 });
 
+// models/index.js
+const sequelize = require('../config/server.js');
+const User = require('./user');
+const Post = require('./post');
+
+User.hasMany(Post, { foreignKey: 'userId' });
+Post.belongsTo(User, { foreignKey: 'userId' });
+
+module.exports = { sequelize, User, Post };
+
 module.exports = router;
 
 // Export the sequelize instance to be used in other files
