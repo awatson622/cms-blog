@@ -1,5 +1,5 @@
 // controllers/postController.js
-const { Post } = require('../models');
+const { Post } = require('../Models');
 
 exports.createPost = async (req, res) => {
   try {

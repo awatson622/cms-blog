@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
-const { Post } = require('../models');
+const { Post } = require('../Models');
 
 // Middleware to fetch posts and pass them to the view
 router.get('/', async (req, res) => {

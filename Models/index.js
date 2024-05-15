@@ -6,8 +6,8 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
   dialect: 'mysql', // or another database dialect
 });
 
-const User = require('./user')(sequelize, Sequelize.DataTypes);
-const Post = require('./post')(sequelize, Sequelize.DataTypes);
+const User = require('./user.js')(sequelize, Sequelize.DataTypes);
+const Post = require('./post.js')(sequelize, Sequelize.DataTypes);
 
 User.hasMany(Post, { foreignKey: 'userId' });
 Post.belongsTo(User, { foreignKey: 'userId' });
