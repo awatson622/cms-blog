@@ -36,7 +36,7 @@ CMS Blog is a content management system (CMS)-style blog site that allows users 
 
 
 ## Installation 
-1. Clone the repository: git clone
+1. Clone the repository: git clone https://github.com/awatson622/cms-blog
 2. Install dependencies: npm install
 3. Set up .env file:
 DB_NAME=your_database_name
