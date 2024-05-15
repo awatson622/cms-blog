@@ -13,26 +13,26 @@ CMS Blog is a content management system (CMS)-style blog site that allows users 
 - [License](#license)
 
 ## Features
-### - User authentication: sign up, log in, and log out
-### - Create, read, update, and delete blog posts
-### - Comment on blog posts
-### - View all posts on the homepage
-### - View individual post details
-### - Protected routes ensuring that only logged-in users can create, update, or delete posts
-### - Session management with automatic session expiration
+- User authentication: sign up, log in, and log out
+- Create, read, update, and delete blog posts
+- Comment on blog posts
+- View all posts on the homepage
+- View individual post details
+- Protected routes ensuring that only logged-in users can create, update, or delete posts
+- Session management with automatic session expiration
 
 ## Technologies Used
 
-### - Node.js: JavaScript runtime
-### - Express.js: Web framework for Node.js
-### - Sequelize: Promise-based Node.js ORM for MySQL
-### - MySQL2: MySQL client for Node.js
-### - dotenv: For loading environment variables from a .env file
-### - bcrypt: For hashing passwords
-### - express-session: For managing user sessions
-### - connect-session-sequelize: For storing sessions in a Sequelize-supported database
-### - express-handlebars: Template engine for rendering HTML pages
-### - Handlebars.js: Templating language for dynamic views
+- Node.js: JavaScript runtime
+- Express.js: Web framework for Node.js
+- Sequelize: Promise-based Node.js ORM for MySQL
+- MySQL2: MySQL client for Node.js
+- dotenv: For loading environment variables from a .env file
+- bcrypt: For hashing passwords
+- express-session: For managing user sessions
+- connect-session-sequelize: For storing sessions in a Sequelize-supported database
+- express-handlebars: Template engine for rendering HTML pages
+- Handlebars.js: Templating language for dynamic views
 
 
 ## Installation 
